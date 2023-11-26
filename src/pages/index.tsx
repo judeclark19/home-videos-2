@@ -1,10 +1,23 @@
-import React from 'react';
-import Layout from '../components/Layout';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 
-async function fetchVideos() {
-    const response = await fetch('/api/videos');
+interface Video {
+    _id: string;
+    url: string;
+    title: string;
+    date: string;
+    description: string;
+    duration: number;
+    beginning: string;
+    location: string;
+    tags: string[];
+    people: string[];
+    notes: string;
+}
+
+const fetchVideos = async (page: number) => {
+    const response = await fetch(`/api/videos?page=${page}&limit=10`);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
@@ -13,24 +26,36 @@ async function fetchVideos() {
 
 const HomePage: React.FC = () => {
 
+    const [page, setPage] = useState<number>(1);
+
     const { data, error, isLoading } = useQuery({
-        queryKey: ['videos'],
-        queryFn: fetchVideos
+        queryKey: ['videos', page],
+        queryFn: () => fetchVideos(page),
+        staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>An error occurred: {error.message}</div>;
     return (
-        // <Layout>
         <>
-            {data && data.data.map(video => (
+            {isLoading && <div>Loading...</div>}
+            {error && <div>An error occurred: {(error as Error).message}</div>}
+            {data && data.data.map((video: Video) => (
                 <div key={video._id}>
                     <h3>{video.title}</h3>
-                    {/* Display other video details */}
+                    {/* other video details */}
                 </div>
             ))}
+            <div>
+                <button onClick={() => setPage(old => Math.max(old - 1, 1))} disabled={page === 1}>
+                    Previous
+                </button>
+                <span>Page {page}</span>
+                <button onClick={() => setPage(old => old + 1)} disabled={data && data.data.length < 10}>
+                    Next
+                </button>
+            </div>
         </>
-        // </Layout>
     );
 };
 
