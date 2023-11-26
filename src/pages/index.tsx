@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import VideoCard from '@/components/VideoCard/VideoCard';
+import Pagination from '@/components/Pagination/Pagination';
 
 
-interface Video {
+export interface Video {
     _id: string;
     url: string;
     title: string;
@@ -40,21 +42,11 @@ const HomePage: React.FC = () => {
         <>
             {isLoading && <div>Loading...</div>}
             {error && <div>An error occurred: {(error as Error).message}</div>}
+            <Pagination page={page} setPage={setPage} data={data} />
             {data && data.data.map((video: Video) => (
-                <div key={video._id}>
-                    <h3>{video.title}</h3>
-                    {/* other video details */}
-                </div>
+                <VideoCard key={video._id} video={video} />
             ))}
-            <div>
-                <button onClick={() => setPage(old => Math.max(old - 1, 1))} disabled={page === 1}>
-                    Previous
-                </button>
-                <span>Page {page}</span>
-                <button onClick={() => setPage(old => old + 1)} disabled={data && data.data.length < 10}>
-                    Next
-                </button>
-            </div>
+            <Pagination page={page} setPage={setPage} data={data} />
         </>
     );
 };
