@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../GlobalStyles";
 
 export const VideoListStyle = styled.div`
     display: flex;
@@ -40,6 +41,14 @@ export const IFrame = styled.iframe`
     border-top-right-radius: 8px;
     `
 
+export const VideoTitle = styled.h3`
+    background-color: ${colors.meadow_jade};
+    /* color: ${colors.lavender_indigo}; */
+    margin: 0;
+    padding: 30px 20px;
+    text-align: center;
+`
+
 export const VideoInfo = styled.div`
   padding: 20px;
   padding-bottom: 0px;
@@ -55,5 +64,12 @@ export const VideoInfo = styled.div`
 export const CommentsCTA = styled.div`
 padding: 20px;
 text-align: center;
+background-color: ${colors.midnight_noir};
+color: ${colors.lavender_indigo};
+border-bottom-left-radius: 8px;
+border-bottom-right-radius: 8px;
+`
 
+export const SendMessageBtn = styled.button`
+background-color: ${colors.meadow_jade}!important;
 `

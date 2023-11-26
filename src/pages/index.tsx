@@ -47,20 +47,25 @@ const HomePage: React.FC = () => {
         staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
-    console.log(data)
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>An error occurred: {error.message}</div>;
+
     return (
         <>
             {isLoading && <div>Loading...</div>}
             {error && <div>An error occurred: {(error as Error).message}</div>}
             <Pagination page={page} setPage={setPage} data={data} />
-            <VideoListStyle>
-                {data && data.data.map((video: Video) => (
-                    <VideoCard key={video._id} video={video} />
-                ))}
-            </VideoListStyle>
+
+            {isLoading && <div>Loading...</div>}
+            {error && <div>An error occurred: {(error as Error).message}</div>}
+            {!isLoading && !error && data && (
+
+
+                <VideoListStyle>
+                    {data && data.data.map((video: Video) => (
+                        <VideoCard key={video._id} video={video} />
+                    ))}
+                </VideoListStyle>
+            )}
 
             <Pagination page={page} setPage={setPage} data={data} />
         </>

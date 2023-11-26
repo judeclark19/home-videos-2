@@ -1,6 +1,14 @@
 import { Video } from "@/pages";
 import React from "react";
-import { CommentsCTA, IFrame, Loading, VideoEl, VideoInfo } from "./VideoCard.styles";
+import {
+  CommentsCTA,
+  IFrame,
+  Loading,
+  SendMessageBtn,
+  VideoEl,
+  VideoInfo,
+  VideoTitle
+} from "./VideoCard.styles";
 
 function VideoCard({ video }: { video: Video }) {
   const videoDate = new Date(`${video.date}T00:00:00`).toLocaleDateString(
@@ -41,8 +49,8 @@ function VideoCard({ video }: { video: Video }) {
         ></IFrame>
       </Loading>
 
+      <VideoTitle>{video.title}</VideoTitle>
       <VideoInfo>
-        <h3>{video.title}</h3>
         <p>
           <strong>Date</strong>: {videoDate}
         </p>
@@ -53,7 +61,6 @@ function VideoCard({ video }: { video: Video }) {
           <p style={{ backgroundColor: "yellow" }}>
             <strong>Clip begins at</strong>: {video.beginning}
           </p>
-
         )}
         {video.description && (
           <p>
@@ -74,8 +81,10 @@ function VideoCard({ video }: { video: Video }) {
         {video.notes && <p className="video-notes"></p>}
       </VideoInfo>
       <CommentsCTA>
-        <p><em>Have comments or corrections for this video?</em></p>
-        <button className="send-message">Send message about this video</button>
+        <p>
+          <em>Have comments or corrections for this video?</em>
+        </p>
+        <SendMessageBtn>Send message about this video</SendMessageBtn>
       </CommentsCTA>
     </VideoEl>
   );
