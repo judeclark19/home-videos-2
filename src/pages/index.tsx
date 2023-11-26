@@ -1,15 +1,37 @@
-import TestComponent from '@/components/TestComponent'
-import React from 'react'
+import React from 'react';
+import Layout from '../components/Layout';
+import { useQuery } from '@tanstack/react-query';
 
-import styled from 'styled-components'
 
-const StyledDiv = styled.div`
-    color: red;`
-
-function index() {
-    return (
-        <StyledDiv><TestComponent /></StyledDiv>
-    )
+async function fetchVideos() {
+    const response = await fetch('/api/videos');
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
 }
 
-export default index
+const HomePage: React.FC = () => {
+
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['videos'],
+        queryFn: fetchVideos
+    });
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>An error occurred: {error.message}</div>;
+    return (
+        // <Layout>
+        <>
+            {data && data.data.map(video => (
+                <div key={video._id}>
+                    <h3>{video.title}</h3>
+                    {/* Display other video details */}
+                </div>
+            ))}
+        </>
+        // </Layout>
+    );
+};
+
+export default HomePage;
