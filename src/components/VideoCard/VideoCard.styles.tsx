@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const VideoListStyle = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 40px;`
+
 export const VideoEl = styled.div`
   border: 1px solid #888;
   width: min-content;
@@ -22,17 +29,20 @@ export const Loading = styled.div`
   justify-content: center;
   font-size: 24px;
   background-color: rgba(0, 0, 0, 0.1);
-  overflow: hidden;
 `;
 
 export const IFrame = styled.iframe`
     max-width: 100%;
     position: absolute;
     top: 0;
-    left: 0;`
+    left: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    `
 
 export const VideoInfo = styled.div`
   padding: 20px;
+  padding-bottom: 0px;
   border-radius: 8px;
   flex-grow: 1;
 
@@ -41,3 +51,9 @@ export const VideoInfo = styled.div`
     background-color: yellow;
   }
 `;
+
+export const CommentsCTA = styled.div`
+padding: 20px;
+text-align: center;
+
+`

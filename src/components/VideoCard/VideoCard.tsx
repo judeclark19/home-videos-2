@@ -1,33 +1,84 @@
-import { Video } from '@/pages'
-import React from 'react'
-import { IFrame, Loading, VideoEl, VideoInfo } from './VideoCard.styles'
-
-
+import { Video } from "@/pages";
+import React from "react";
+import { CommentsCTA, IFrame, Loading, VideoEl, VideoInfo } from "./VideoCard.styles";
 
 function VideoCard({ video }: { video: Video }) {
+  const videoDate = new Date(`${video.date}T00:00:00`).toLocaleDateString(
+    "en-US",
+    {
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }
+  );
 
-  console.log(video)
-  return <VideoEl>
+  function formatDuration(seconds: number) {
+    // Calculate the minutes and seconds from the total seconds
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
 
-    <Loading>Loading video...
+    // Pad the minutes and seconds with leading zeros if they are less than 10
+    const paddedMinutes = String(minutes).padStart(2, "0");
+    const paddedSeconds = String(remainingSeconds).padStart(2, "0");
 
-      <IFrame
-        className="video-iframe"
-        src={video.url}
-        frameBorder="0"
-        width="560"
-        height="315"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        loading="lazy"
-      ></IFrame>
-    </Loading>
+    // Combine the minutes and seconds in MM:SS format
+    return `${paddedMinutes}:${paddedSeconds}`;
+  }
 
-    <VideoInfo>
-      <h3>{video.title}</h3>
-    </VideoInfo>
+  return (
+    <VideoEl id={video._id}>
+      <Loading>
+        Loading video...
+        <IFrame
+          className="video-iframe"
+          src={video.url}
+          frameBorder="0"
+          width="560"
+          height="315"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+        ></IFrame>
+      </Loading>
 
-  </VideoEl>
+      <VideoInfo>
+        <h3>{video.title}</h3>
+        <p>
+          <strong>Date</strong>: {videoDate}
+        </p>
+        <p>
+          <strong>Duration</strong>: {formatDuration(video.duration)}
+        </p>
+        {video.beginning && (
+          <p style={{ backgroundColor: "yellow" }}>
+            <strong>Clip begins at</strong>: {video.beginning}
+          </p>
+
+        )}
+        {video.description && (
+          <p>
+            <strong>Description</strong>: {video.description}
+          </p>
+        )}
+        <p>
+          <strong>Location</strong>: {video.location}
+        </p>
+
+        <p>
+          <strong>Tags</strong>: {video.tags.join(", ")}
+        </p>
+        <p>
+          <strong>People</strong>: {video.people.join(", ")}
+        </p>
+
+        {video.notes && <p className="video-notes"></p>}
+      </VideoInfo>
+      <CommentsCTA>
+        <p><em>Have comments or corrections for this video?</em></p>
+        <button className="send-message">Send message about this video</button>
+      </CommentsCTA>
+    </VideoEl>
+  );
   // return (
   //   <div className="videoEl">
   //     <div className="loading">
@@ -62,4 +113,4 @@ function VideoCard({ video }: { video: Video }) {
   // )
 }
 
-export default VideoCard
+export default VideoCard;
