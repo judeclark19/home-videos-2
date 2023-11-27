@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const isModalOpenState = atom({
   key: "isModalOpen",
-  default: true
+  default: false
 });
 
 export const videoBeingCommentedState = atom({
