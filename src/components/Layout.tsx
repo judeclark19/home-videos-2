@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 />
             </Head>
             <PageTitle>
-                Fox Family Home Videos
+                Fox&nbsp;Family Home&nbsp;Videos
             </PageTitle>
             <RecoilRoot>
                 <main>{children}</main>

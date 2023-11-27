@@ -6,7 +6,7 @@ export const VideoListStyle = styled.div`
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
-  margin-bottom: 40px;
+  margin: 0px 14px 40px 14px;
 `;
 
 export const VideoEl = styled.div`
@@ -74,14 +74,13 @@ export const CommentsCTA = styled.div`
 `;
 
 export const SendMessageBtn = styled.button`
-  background-color: ${colors.white_smoke};
-  color: ${colors.teal_blue};
-  border-color: ${colors.moonstone_blue};
+  background-color: ${colors.white_smoke}!important;
+  color: ${colors.teal_blue}!important;
+  border-color: ${colors.moonstone_blue}!important;
   border-radius: 8px;
 
   &:hover {
-    background-color: ${colors.powder_blue};
-    border-color: ${colors.moonstone_blue};
-    color: ${colors.teal_blue};
-  }
+      background-color: ${colors.teal_blue}!important;
+      color: ${colors.white_smoke}!important;
+    }
 `;

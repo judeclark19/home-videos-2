@@ -38,8 +38,7 @@ export const GlobalStylesDiv = styled.div`
 
 export const PageTitle = styled.h1`
   text-align: center;
-  margin: 0;
-  margin-bottom: 30px;
+  margin: 0 14px 30px 14px;
   padding: 22px 0px;
   color: ${colors.teal_blue};
 `;

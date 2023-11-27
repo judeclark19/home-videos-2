@@ -42,7 +42,8 @@ export const PageNumbers = styled.div`
 export const PageSelect = styled.select`
   padding: 0px 8px;
   background-color: ${colors.magic_mint};
-  color: white;
+  border-color: ${colors.moonstone_blue};
+  /* color: white; */
   display: none;
 
   @media (max-width: 768px) {
