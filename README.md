@@ -1,5 +1,9 @@
 # home-videos-2
 
+## Deployed Site
+
+[https://fox-home-videos-f48b3a99c9d7.herokuapp.com/](https://fox-home-videos-f48b3a99c9d7.herokuapp.com/)
+
 ## Video Attributes
 
 - URL

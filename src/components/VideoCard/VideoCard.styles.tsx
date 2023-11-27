@@ -46,9 +46,11 @@ export const VideoTitleAndDate = styled.div`
   background-color: ${colors.teal_blue};
   color: ${colors.white_smoke};
   text-align: center;
-`;
 
-export const VideoTitle = styled.h3``;
+  h2 {
+    margin: 20px;
+  }
+`;
 
 export const VideoInfo = styled.div`
   padding: 20px;
