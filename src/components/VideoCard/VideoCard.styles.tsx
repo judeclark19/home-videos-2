@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { colors } from "../GlobalStyles";
 
 export const VideoListStyle = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    margin-bottom: 40px;`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 40px;
+`;
 
 export const VideoEl = styled.div`
   border: 1px solid #888;
@@ -33,21 +34,21 @@ export const Loading = styled.div`
 `;
 
 export const IFrame = styled.iframe`
-    max-width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    `
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+`;
 
 export const VideoTitle = styled.h3`
-    background-color: ${colors.meadow_jade};
-    /* color: ${colors.lavender_indigo}; */
-    margin: 0;
-    padding: 30px 20px;
-    text-align: center;
-`
+  background-color: ${colors.teal_blue};
+  margin: 0;
+  padding: 30px 20px;
+  text-align: center;
+  color: ${colors.white_smoke};
+`;
 
 export const VideoInfo = styled.div`
   padding: 20px;
@@ -62,14 +63,24 @@ export const VideoInfo = styled.div`
 `;
 
 export const CommentsCTA = styled.div`
-padding: 20px;
-text-align: center;
-background-color: ${colors.midnight_noir};
-color: ${colors.lavender_indigo};
-border-bottom-left-radius: 8px;
-border-bottom-right-radius: 8px;
-`
+  padding: 20px;
+  text-align: center;
+  background-color: ${colors.magic_mint};
+  color: ${colors.teal_blue};
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+`;
 
 export const SendMessageBtn = styled.button`
-background-color: ${colors.meadow_jade}!important;
-`
+  background-color: ${colors.white_smoke};
+  color: ${colors.teal_blue};
+  border-color: ${colors.moonstone_blue};
+  border-radius: 8px;
+
+  // hover
+  &:hover {
+    background-color: ${colors.powder_blue};
+    border-color: ${colors.moonstone_blue};
+    color: ${colors.teal_blue};
+  }
+`;

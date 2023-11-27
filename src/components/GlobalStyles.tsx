@@ -1,55 +1,24 @@
 import styled from "styled-components";
 
 export const colors = {
-    meadow_jade: '#4fc883',
-    ivory_frost: '#fcf1f2',
-    lavender_indigo: '#985fe0',
-    midnight_noir: '#2d2430',
+    teal_blue: '#388087',
+    moonstone_blue: '#6fb3b8',
+    powder_blue: '#badfe7',
+    magic_mint: '#c2edce',
+    white_smoke: '#f6f6f2',
 }
 
 
 export const GlobalStylesDiv = styled.div`
 
-background-color: ${colors.ivory_frost};
-color: ${colors.midnight_noir};
+background-color: ${colors.white_smoke};
+color: ${colors.teal_blue};
 font-family: 'Noto Sans', sans-serif;
 
 button {
-    color: ${colors.midnight_noir};
     padding: 8px 16px;
-    background: transparent;
-    border: 1px solid ${colors.meadow_jade};
     cursor: pointer;
     border-radius: 2px;
-    font-size: 16px;
-
-    &.active {
-        background-color: green;
-        color: white;
-    }
-
-    &:hover:not(.active) {
-        background-color: ${colors.meadow_jade};
-        color: white;
-    }
-
-    &:disabled {
-        background-color: #ccc;
-        color: #888;
-        cursor: not-allowed;
-        pointer-events: none;
-    }
-
-    &#cancel-btn {
-        border: 1px solid rgba(128, 0, 0, .4);
-        width: 500px;
-        max-width: 100%;
-
-        &:hover {
-            background-color: rgba(128, 0, 0, .4);
-            color: white;
-        }
-    }
 }
 
 `
@@ -59,7 +28,6 @@ text-align: center;
 margin: 0;
 margin-bottom: 30px;
 padding: 22px 0px;
-color: ${colors.ivory_frost};
-background-color: ${colors.midnight_noir};
+color: ${colors.teal_blue};
 
 `

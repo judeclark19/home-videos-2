@@ -9,12 +9,16 @@ export const PaginationStyle = styled.div`
 `;
 
 export const PrevNext = styled.button`
-    
-    &:disabled {
-       border: none
-    }
-    
-`
+  background-color: ${colors.magic_mint};
+  border: 1px solid ${colors.teal_blue};
+  &:hover {
+    background-color: ${colors.teal_blue};
+    color: ${colors.white_smoke};
+  }
+  &:disabled {
+    border: none;
+  }
+`;
 
 export const PageNumbers = styled.div`
   display: flex;
@@ -28,14 +32,18 @@ export const PageNumbers = styled.div`
   button {
     font-size: 14px;
 
+    background-color: ${colors.magic_mint};
+    border: 1px solid ${colors.moonstone_blue};
+
     &:hover {
-      background-color: ${colors.meadow_jade};
+      background-color: ${colors.teal_blue};
+      color: ${colors.white_smoke};
     }
 
     &:disabled {
-        background-color: ${colors.lavender_indigo};
-      color: ${colors.ivory_frost};
-      border: 1px solid ${colors.lavender_indigo};
+      background-color: ${colors.powder_blue};
+      color: ${colors.white_smoke};
+      border: 1px solid ${colors.powder_blue};
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -44,7 +52,7 @@ export const PageNumbers = styled.div`
 
 export const PageSelect = styled.select`
   padding: 0px 8px;
-  background-color: ${colors.meadow_jade};
+  background-color: ${colors.magic_mint};
   color: white;
   display: none;
 
