@@ -48,9 +48,7 @@ function MessageModal() {
     });
 
     function getButtonText() {
-        if (postMessage.isLoading) {
-            return "Sending...";
-        } else if (postMessage.isSuccess) {
+        if (postMessage.isSuccess) {
             return "Message sent! ✓";
         } else {
             return "Send message to the webmaster (Jude)";
