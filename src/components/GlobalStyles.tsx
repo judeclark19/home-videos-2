@@ -8,6 +8,7 @@ export const colors = {
     white_smoke: "#f6f6f2",
     vermillion_flame: "#f04134",
     sunshine_glow: "#fbd67e",
+    gray: "#8fa2a7"
 };
 
 export const GlobalStylesDiv = styled.div`
@@ -24,6 +25,13 @@ export const GlobalStylesDiv = styled.div`
     &:hover {
       background-color: ${colors.teal_blue};
       color: ${colors.white_smoke};
+    }
+
+    &:disabled {
+      background-color: #8fa2a7;
+      color: ${colors.white_smoke};
+      border: 1px solid #8fa2a7;
+      cursor: not-allowed;
     }
   }
 `;

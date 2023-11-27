@@ -10,11 +10,13 @@ import {
   VideoTitleAndDate
 } from "./VideoCard.styles";
 import { useRecoilState } from "recoil";
-import { isModalOpenState } from "@/state";
+import { isModalOpenState, videoBeingCommentedState } from "@/state";
+import { useMutation } from "@tanstack/react-query";
 
 function VideoCard({ video }: { video: Video }) {
 
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
+  const [videoBeingCommented, setVideoBeingCommented] = useRecoilState(videoBeingCommentedState);
 
   const videoDate = new Date(`${video.date}T00:00:00`).toLocaleDateString(
     "en-US",
@@ -37,6 +39,7 @@ function VideoCard({ video }: { video: Video }) {
     // Combine the minutes and seconds in MM:SS format
     return `${paddedMinutes}:${paddedSeconds}`;
   }
+
 
   return (
     <VideoEl id={video._id}>
@@ -91,7 +94,10 @@ function VideoCard({ video }: { video: Video }) {
           <em>Have comments or corrections for this video?</em>
         </p>
         <SendMessageBtn
-          onClick={() => setIsModalOpen(!isModalOpen)}
+          onClick={() => {
+            setVideoBeingCommented({ ...videoBeingCommented, videoId: video._id, url: video.url, title: video.title });
+            setIsModalOpen(true);
+          }}
         >Send message about this video</SendMessageBtn>
       </CommentsCTA>
     </VideoEl>

@@ -61,4 +61,11 @@ export const CancelButton = styled.button`
          background-color: ${colors.sunshine_glow}!important;
          color: ${colors.vermillion_flame}!important;
     }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: ${colors.gray}!important;
+        border-color: ${colors.gray}!important;
+        color: white!important;
+    }
 `
