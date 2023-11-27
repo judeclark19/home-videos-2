@@ -9,12 +9,8 @@ export const PaginationStyle = styled.div`
 `;
 
 export const PrevNext = styled.button`
-  background-color: ${colors.magic_mint};
-  border: 1px solid ${colors.teal_blue};
-  &:hover {
-    background-color: ${colors.teal_blue};
-    color: ${colors.white_smoke};
-  }
+  border-radius: 2px;
+
   &:disabled {
     border: none;
   }
@@ -31,14 +27,7 @@ export const PageNumbers = styled.div`
 
   button {
     font-size: 14px;
-
-    background-color: ${colors.magic_mint};
-    border: 1px solid ${colors.moonstone_blue};
-
-    &:hover {
-      background-color: ${colors.teal_blue};
-      color: ${colors.white_smoke};
-    }
+    border-radius: 2px;
 
     &:disabled {
       background-color: ${colors.powder_blue};

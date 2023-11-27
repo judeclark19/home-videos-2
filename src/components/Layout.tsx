@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React, { ReactNode } from 'react';
 import { GlobalStylesDiv, PageTitle, colors } from './GlobalStyles';
 import "../globals.css";
+import { RecoilRoot } from 'recoil';
 
 type LayoutProps = {
     children: ReactNode;
@@ -23,7 +24,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <PageTitle>
                 Fox Family Home Videos
             </PageTitle>
-            <main>{children}</main>
+            <RecoilRoot>
+                <main>{children}</main>
+            </RecoilRoot>
         </GlobalStylesDiv>
     );
 };

@@ -4,7 +4,9 @@ import VideoCard from '@/components/VideoCard/VideoCard';
 import Pagination from '@/components/Pagination/Pagination';
 import { VideoListStyle } from '@/components/VideoCard/VideoCard.styles';
 import { useRouter } from 'next/router';
-
+import MessageModal from '@/components/MessageModal/MessageModal';
+import { useRecoilValue } from 'recoil';
+import { isModalOpenState } from '@/state';
 
 export interface Video {
     _id: string;
@@ -29,6 +31,7 @@ const fetchVideos = async (page: number) => {
 }
 
 const HomePage: React.FC = () => {
+    const isModalOpen = useRecoilValue(isModalOpenState)
 
     const [page, setPage] = useState<number>(1);
 
@@ -51,6 +54,7 @@ const HomePage: React.FC = () => {
 
     return (
         <>
+            {isModalOpen && <MessageModal />}
             {isLoading && <div>Loading...</div>}
             {error && <div>An error occurred: {(error as Error).message}</div>}
             <Pagination page={page} setPage={setPage} data={data} />

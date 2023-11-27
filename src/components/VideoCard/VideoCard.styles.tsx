@@ -42,13 +42,13 @@ export const IFrame = styled.iframe`
   border-top-right-radius: 8px;
 `;
 
-export const VideoTitle = styled.h3`
+export const VideoTitleAndDate = styled.div`
   background-color: ${colors.teal_blue};
-  margin: 0;
-  padding: 30px 20px;
-  text-align: center;
   color: ${colors.white_smoke};
+  text-align: center;
 `;
+
+export const VideoTitle = styled.h3``;
 
 export const VideoInfo = styled.div`
   padding: 20px;
@@ -77,7 +77,6 @@ export const SendMessageBtn = styled.button`
   border-color: ${colors.moonstone_blue};
   border-radius: 8px;
 
-  // hover
   &:hover {
     background-color: ${colors.powder_blue};
     border-color: ${colors.moonstone_blue};
