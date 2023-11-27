@@ -1,6 +1,9 @@
 {
   "name": "home-videos-2",
   "version": "0.1.0",
+  "engines": {
+    "node": "21.x"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
