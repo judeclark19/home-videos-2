@@ -87,7 +87,7 @@ function VideoCard({ video }: { video: Video }) {
           <strong>People</strong>: {video.people.join(", ")}
         </p>
 
-        {video.notes && <p className="video-notes"></p>}
+        {video.notes && <p><strong>Notes</strong>: {video.notes}</p>}
       </VideoInfo>
       <CommentsCTA>
         <p>
