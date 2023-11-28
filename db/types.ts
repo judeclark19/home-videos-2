@@ -6,6 +6,7 @@ export interface Video {
   description: string;
   duration: number;
   beginning: string;
+  partNumber: number;
   location: string;
   tags: string[];
   people: string[];

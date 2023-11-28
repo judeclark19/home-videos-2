@@ -53,7 +53,7 @@ function VideoCard({ video }: { video: Video }) {
 
 
       <VideoTitleAndDate>
-        <h2>{video.title}</h2>
+        <h2>{video.title}{video.partNumber && ` (Part ${video.partNumber})`}</h2>
         <h3>{videoDate}</h3>
       </VideoTitleAndDate>
       <VideoInfo>
