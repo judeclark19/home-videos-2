@@ -1,6 +1,7 @@
-import { Video } from "@/pages";
-import { useRouter } from "next/router";
+
+import { useRouter } from "next/navigation";
 import { PageNumbers, PageSelect, PaginationStyle, PrevNext } from "./Pagination.styles";
+import { Video } from "../../db/types";
 
 function Pagination({
     setPage,
@@ -9,29 +10,21 @@ function Pagination({
 }: {
     setPage: React.Dispatch<React.SetStateAction<number>>;
     page: number;
-    data: { data: Array<Video> };
+    data: { videos: Array<Video>, totalVideos: number }
 }) {
     const router = useRouter();
 
-    const totalPages = 23;
+    const totalPages = Math.ceil(data?.totalVideos / 10) || 23;
 
     const handlePageChange = (newPage: number) => {
         setPage(newPage);
-        const currentPath = router.pathname;
-        const currentQuery = { ...router.query };
-        currentQuery.page = newPage.toString();
-        router.push(
-            {
-                pathname: currentPath,
-                query: currentQuery
-            },
-            undefined,
-            { shallow: true }
-        );
-    };
 
-    // const totalPages = Math.ceil(data.data.length / 10);
-    // console.log('data.length', data.data)
+        // change page param in the router
+        const url = new URL(window.location.href);
+        url.searchParams.set("page", newPage.toString());
+        router.push(url.pathname + url.search);
+
+    };
 
     return (
         <PaginationStyle>
@@ -66,7 +59,7 @@ function Pagination({
 
             <PrevNext
                 onClick={() => handlePageChange(page + 1)}
-                disabled={data && data.data.length < 10}
+            // disabled={data && data.data.length < 10}
             >
                 &raquo;
             </PrevNext>

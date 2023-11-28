@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../GlobalStyles";
+import { colors } from "../../app/GlobalStyles";
 
 export const ModalShade = styled.div`
     background-color: rgba(0, 0, 0, .4);

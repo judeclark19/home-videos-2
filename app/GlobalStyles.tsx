@@ -11,7 +11,7 @@ export const colors = {
     gray: "#8fa2a7"
 };
 
-export const GlobalStylesDiv = styled.div`
+export const GlobalStylesBody = styled.body`
   background-color: ${colors.white_smoke};
   color: ${colors.teal_blue};
   font-family: "Noto Sans", sans-serif;

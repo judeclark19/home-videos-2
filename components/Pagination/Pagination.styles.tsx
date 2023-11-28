@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../GlobalStyles";
+import { colors } from "../../app/GlobalStyles";
 
 export const PaginationStyle = styled.div`
   padding: 0 20px 50px 20px;

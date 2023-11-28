@@ -1,9 +1,6 @@
 {
   "name": "home-videos-2",
   "version": "0.1.0",
-  "engines": {
-    "node": "21.x"
-  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -21,6 +18,7 @@
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-methods": "^7.23.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

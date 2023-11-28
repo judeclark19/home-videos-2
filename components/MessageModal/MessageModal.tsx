@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { isModalOpenState, videoBeingCommentedState } from "@/state";
-import { IFrame, Loading } from "../VideoCard/VideoCard.styles";
+
 import {
     CancelButton,
     ModalShade,
@@ -9,7 +8,9 @@ import {
 } from "./MessageModal.styles";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { IFrame, Loading } from "../VideoList/VideoList.styles";
+import { isModalOpenState, videoBeingCommentedState } from "../../app/providers";
 
 function MessageModal() {
     const [formDisabled, setFormDisabled] = useState(false);
@@ -41,10 +42,19 @@ function MessageModal() {
         },
         onSettled: () => {
             setTimeout(() => {
+                setVideoBeingCommented({
+                    videoId: "",
+                    url: "",
+                    title: "",
+                    senderName: "",
+                    message: "",
+                    addressed: false
+                });
                 setIsModalOpen(false);
                 setFormDisabled(false);
             }, 2000);
-        }
+        },
+
     });
 
     function getButtonText() {
@@ -79,6 +89,7 @@ function MessageModal() {
                     id={videoBeingCommented.videoId}
                     onSubmit={(e) => {
                         e.preventDefault();
+                        // console.log(videoBeingCommented)
                         postMessage.mutate(videoBeingCommented);
                     }}
                 >

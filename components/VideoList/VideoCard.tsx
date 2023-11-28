@@ -1,17 +1,11 @@
-import { Video } from "@/pages";
-import React from "react";
-import {
-  CommentsCTA,
-  IFrame,
-  Loading,
-  SendMessageBtn,
-  VideoEl,
-  VideoInfo,
-  VideoTitleAndDate
-} from "./VideoCard.styles";
+
+
 import { useRecoilState } from "recoil";
-import { isModalOpenState, videoBeingCommentedState } from "@/state";
+
 import { useMutation } from "@tanstack/react-query";
+import { Video } from "../../db/types";
+import { CommentsCTA, IFrame, Loading, SendMessageBtn, VideoEl, VideoInfo, VideoTitleAndDate } from "./VideoList.styles";
+import { isModalOpenState, videoBeingCommentedState } from "../../app/providers";
 
 function VideoCard({ video }: { video: Video }) {
 
