@@ -1,13 +1,13 @@
 "use client";
 
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Pagination from '../Pagination/Pagination';
 
 import { Video } from '../../db/types';
 import VideoCard from '../VideoCard/VideoCard';
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { currentPageNumberState, totalVideosState } from '../../app/providers';
 
 const VideoListStyle = styled.div`
@@ -31,7 +31,7 @@ function VideoList() {
 
     const [page, setPage] = useRecoilState<number>(currentPageNumberState);
 
-    const [totalVideos, setTotalVideos] = useRecoilState<number>(totalVideosState);
+    const setTotalVideos = useSetRecoilState<number>(totalVideosState);
 
     useEffect(() => {
         // Get the page number from URL query string

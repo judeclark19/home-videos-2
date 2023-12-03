@@ -15,9 +15,11 @@ export const GlobalStylesBody = styled.body`
 
   background-color: ${colors.white_smoke};
   color: ${colors.teal_blue};
-  font-family: "Noto Sans", sans-serif;
-
+  
   button {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    color: ${colors.teal_blue};
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
@@ -40,7 +42,8 @@ export const GlobalStylesBody = styled.body`
 
 export const PageTitle = styled.h1`
   text-align: center;
-  margin: 0 14px 30px 14px;
+  font-size: 44px;
+  margin: 0 14px 14px 14px;
   padding: 22px 0px;
   color: ${colors.teal_blue};
 `;

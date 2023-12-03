@@ -19,13 +19,14 @@
 
 ## Future Development
 
-- [ ] Style pagination
-- [ ] Mobile friendly
-- [ ] Comments box on each one to receive input from family members
-- [ ] New color scheme
+- [x] Style pagination
+- [x] Mobile friendly
+- [x] Comments box on each one to receive input from family members
+- [x] New color scheme
 - [ ] Global Search
 - [ ] Search by tags, locations or people
 - [ ] Filter by date range
 - [ ] Favorites list
-- [ ] Random video button
-- [ ] Single video page view
+- [x] Random video button
+- [x] Single video page view
+- [ ] Improve FOUC/loading states

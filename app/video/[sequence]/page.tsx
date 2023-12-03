@@ -9,6 +9,11 @@ import VideoCard from '../../../components/VideoCard/VideoCard';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { currentPageNumberState, totalVideosState } from '../../providers';
+import { Inter, Permanent_Marker } from 'next/font/google';
+import Nav from '../../../components/Nav/Nav';
+
+const inter = Inter({ subsets: ['latin'] });
+const permanentMarker = Permanent_Marker({ subsets: ['latin'], weight: ['400'], });
 
 const fetchVideo = async (sequence: number) => {
     const response = await fetch(`/api/videos/${sequence}`);
@@ -56,10 +61,12 @@ function VideoPage({ params }: { params: { sequence: string } }) {
 
     return (
         <>
-            {/* TODO: track page param in recoil and apply here */}
-            <button onClick={() => {
-                router.push(`/?page=${currentPage}`)
-            }}>Go back to All Videos</button>
+
+            <PageTitle className={permanentMarker.className}>
+                Fox&nbsp;Family Home&nbsp;Videos
+            </PageTitle>
+            <Nav />
+
             <PageTitle>
                 {data.video.title}
             </PageTitle>
@@ -68,9 +75,9 @@ function VideoPage({ params }: { params: { sequence: string } }) {
                 display: 'flex',
                 justifyContent: 'center',
                 gap: '20px',
-                marginBottom: '20px'
+                marginBottom: '50px'
             }}>
-                <button disabled={sequenceNo === 1}
+                <button className={inter.className} disabled={sequenceNo === 1}
                     onClick={() => {
                         router.push(`/video/${sequenceNo - 1}`)
 
@@ -84,24 +91,6 @@ function VideoPage({ params }: { params: { sequence: string } }) {
                         router.push(`/video/${sequenceNo + 1}`)
                     }}
                 >Go to next video</button>
-            </div>
-
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginBottom: "30px"
-            }}>
-
-                <SendMessageBtn
-                    onClick={() => {
-                        let randomSequence = Math.floor(Math.random() * totalVideos) + 1;
-                        while (randomSequence === sequenceNo) {
-                            randomSequence = Math.floor(Math.random() * totalVideos) + 1;
-                        }
-                        console.log(randomSequence)
-                        router.push(`/video/${randomSequence}`)
-                    }}
-                >Go to random video</SendMessageBtn>
             </div>
 
             <div style={{

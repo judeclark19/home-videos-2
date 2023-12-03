@@ -6,6 +6,10 @@ import { PageTitle } from "./GlobalStyles"
 import { isModalOpenState } from "./providers";
 import MessageModal from "../components/MessageModal/MessageModal";
 import { useEffect } from "react";
+import { Permanent_Marker } from "next/font/google";
+import Nav from "../components/Nav/Nav";
+
+const permanentMarker = Permanent_Marker({ subsets: ['latin'], weight: ['400'], });
 
 function Home() {
 
@@ -17,9 +21,10 @@ function Home() {
 
     return (
         <>
-            <PageTitle>
+            <PageTitle className={permanentMarker.className}>
                 Fox&nbsp;Family Home&nbsp;Videos
             </PageTitle>
+            <Nav />
             {isModalOpen && (<MessageModal />)}
             <VideoList />
         </>
