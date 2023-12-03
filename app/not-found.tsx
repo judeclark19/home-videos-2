@@ -2,7 +2,10 @@ import React from 'react'
 
 function NotFound() {
     return (
-        <div>this is a custom NotFound</div>
+        <div>
+            <h1>Page not found</h1>
+            <a href="/">Back to home</a>
+        </div>
     )
 }
 

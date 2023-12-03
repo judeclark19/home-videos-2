@@ -7,7 +7,7 @@ import { isModalOpenState } from "./providers";
 import MessageModal from "../components/MessageModal/MessageModal";
 
 function Home() {
-
+    document.title = "Fox Family Home Videos"
     const isModalOpen = useRecoilValue(isModalOpenState);
 
     return (

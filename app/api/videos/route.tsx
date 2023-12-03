@@ -40,6 +40,7 @@ export async function GET(request: NextRequest) {
                 $project: {
                     _id: 1,
                     url: 1,
+                    sequence: 1,
                     title: 1,
                     date: 1,
                     duration: 1,
@@ -64,7 +65,7 @@ export async function GET(request: NextRequest) {
                     }
                 }
             },
-            { $sort: { date: 1 } },
+            { $sort: { sequence: 1 } },
             { $skip: skip },
             { $limit: limit }
         ];

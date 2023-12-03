@@ -1,25 +1,19 @@
 
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-import { useMutation } from "@tanstack/react-query";
 import { Video } from "../../db/types";
-import { CommentsCTA, IFrame, Loading, SendMessageBtn, VideoEl, VideoInfo, VideoTitleAndDate } from "./VideoList.styles";
+import { CommentsCTA, IFrame, Loading, SendMessageBtn, Sequence, VideoEl, VideoInfo, VideoTitleAndDate } from "./VideoCard.styles";
 import { isModalOpenState, videoBeingCommentedState } from "../../app/providers";
+import useDateFormat from "../../helpers/dateFormat";
+import { useRouter } from "next/navigation";
 
-function VideoCard({ video }: { video: Video }) {
+function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceButton?: boolean }) {
 
-  const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
+  const router = useRouter();
+  const setIsModalOpen = useSetRecoilState(isModalOpenState);
   const [videoBeingCommented, setVideoBeingCommented] = useRecoilState(videoBeingCommentedState);
 
-  const videoDate = new Date(`${video.date}T00:00:00`).toLocaleDateString(
-    "en-US",
-    {
-      month: "long",
-      day: "numeric",
-      year: "numeric"
-    }
-  );
 
   function formatDuration(seconds: number) {
     // Calculate the minutes and seconds from the total seconds
@@ -38,6 +32,14 @@ function VideoCard({ video }: { video: Video }) {
   return (
     <VideoEl id={video._id}>
       <Loading>
+        <Sequence
+          sequenceButton={sequenceButton}
+          onClick={() => {
+            if (sequenceButton) {
+              router.push(`/video/${video.sequence}`);
+            }
+          }}
+        >{video.sequence}.</Sequence>
         Loading video...
         <IFrame
           className="video-iframe"
@@ -54,7 +56,7 @@ function VideoCard({ video }: { video: Video }) {
 
       <VideoTitleAndDate>
         <h2>{video.title}{video.partNumber && ` (Part ${video.partNumber})`}</h2>
-        <h3>{videoDate}</h3>
+        <h3>{useDateFormat(video.date)}</h3>
       </VideoTitleAndDate>
       <VideoInfo>
         <p>
@@ -89,7 +91,7 @@ function VideoCard({ video }: { video: Video }) {
         </p>
         <SendMessageBtn
           onClick={() => {
-            setVideoBeingCommented({ ...videoBeingCommented, videoId: video._id, url: video.url, title: video.title });
+            setVideoBeingCommented({ ...videoBeingCommented, videoId: video._id, partNumber: video.partNumber, sequence: video.sequence, url: video.url, title: video.title });
             setIsModalOpen(true);
           }}
         >Send message about this video</SendMessageBtn>

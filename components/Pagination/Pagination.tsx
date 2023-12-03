@@ -59,7 +59,7 @@ function Pagination({
 
             <PrevNext
                 onClick={() => handlePageChange(page + 1)}
-            // disabled={data && data.data.length < 10}
+                disabled={page === totalPages}
             >
                 &raquo;
             </PrevNext>

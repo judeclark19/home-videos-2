@@ -1,13 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../app/GlobalStyles";
 
-export const VideoListStyle = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  margin: 0px 14px 40px 14px;
-`;
+
 
 export const VideoEl = styled.div`
   border: 1px solid #888;
@@ -46,15 +40,47 @@ export const VideoTitleAndDate = styled.div`
   background-color: ${colors.teal_blue};
   color: ${colors.white_smoke};
   text-align: center;
-
+  position: relative;
   h2 {
     margin: 20px;
   }
 `;
 
+export const Sequence = styled.div<{
+  sequenceButton: boolean;
+}>`
+  font-size: 20px;
+  height: 28px;
+  width: 28px;
+  color: black;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background-color: ${colors.magic_mint};
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${(props) =>
+    props.sequenceButton &&
+    `
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+
+    &:hover {
+      background-color: ${colors.teal_blue};
+      color: ${colors.white_smoke};
+      font-weight: 700;
+      scale: 1.07;
+    }
+  `}
+`;
+
 export const VideoInfo = styled.div`
-  padding: 20px;
-  padding-bottom: 0px;
+  padding: 0 20px;
   border-radius: 8px;
   flex-grow: 1;
 
@@ -73,6 +99,7 @@ export const CommentsCTA = styled.div`
   border-bottom-right-radius: 8px;
 `;
 
+// TODO: figure out my button styles
 export const SendMessageBtn = styled.button`
   background-color: ${colors.white_smoke}!important;
   color: ${colors.teal_blue}!important;
@@ -80,7 +107,7 @@ export const SendMessageBtn = styled.button`
   border-radius: 8px;
 
   &:hover {
-      background-color: ${colors.teal_blue}!important;
-      color: ${colors.white_smoke}!important;
-    }
+    background-color: ${colors.teal_blue}!important;
+    color: ${colors.white_smoke}!important;
+  }
 `;

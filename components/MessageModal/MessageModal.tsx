@@ -9,7 +9,7 @@ import {
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { IFrame, Loading } from "../VideoList/VideoList.styles";
+import { IFrame, Loading } from "../VideoCard/VideoCard.styles";
 import { isModalOpenState, videoBeingCommentedState } from "../../app/providers";
 
 function MessageModal() {
@@ -44,6 +44,8 @@ function MessageModal() {
             setTimeout(() => {
                 setVideoBeingCommented({
                     videoId: "",
+                    sequence: null,
+                    partNumber: null,
                     url: "",
                     title: "",
                     senderName: "",
@@ -69,8 +71,8 @@ function MessageModal() {
         <ModalShade>
             <ModalWindow>
                 <h2>
-                    Submit comments and/or corrections for <br />"
-                    {videoBeingCommented.title}"
+                    Submit comments and/or corrections for video number {videoBeingCommented.sequence}: <br />"
+                    {videoBeingCommented.title}{videoBeingCommented.partNumber && ` (Part ${videoBeingCommented.partNumber})`}"
                 </h2>
                 <Loading>
                     Loading video...
@@ -137,6 +139,8 @@ function MessageModal() {
                         // reset form
                         setVideoBeingCommented({
                             videoId: "",
+                            sequence: null,
+                            partNumber: null,
                             url: "",
                             title: "",
                             senderName: "",

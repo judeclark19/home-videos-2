@@ -32,6 +32,8 @@ export const isModalOpenState = atom({
 
 export const videoBeingCommentedState = atom<{
     videoId: string;
+    sequence: number | null;
+    partNumber: number | null;
     url: string;
     title: string;
     senderName: string;
@@ -41,10 +43,23 @@ export const videoBeingCommentedState = atom<{
     key: "videoBeingCommented",
     default: {
         videoId: "",
+        sequence: null,
+        partNumber: null,
         url: "",
         title: "",
         senderName: "",
         message: "",
         addressed: false
     }
+});
+
+
+export const totalVideosState = atom({
+    key: "totalVideos",
+    default: 0
+});
+
+export const currentPageNumberState = atom({
+    key: "currentPageNumber",
+    default: 1
 });

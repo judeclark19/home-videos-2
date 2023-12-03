@@ -1,6 +1,7 @@
 export interface Video {
   _id: string;
   url: string;
+  sequence: number;
   title: string;
   date: string;
   description: string;
