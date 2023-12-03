@@ -37,7 +37,7 @@ function VideoList() {
         // Get the page number from URL query string
         const pageNumber = parseInt(new URL(window.location.href).searchParams.get("page") || "1", 10);
         setPage(pageNumber);
-    }, []);
+    }, [setPage]);
 
     const { data, error, isLoading } = useQuery({
         queryKey: ['videos', page],

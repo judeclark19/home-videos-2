@@ -5,9 +5,14 @@ import VideoList from "../components/VideoList/VideoList"
 import { PageTitle } from "./GlobalStyles"
 import { isModalOpenState } from "./providers";
 import MessageModal from "../components/MessageModal/MessageModal";
+import { useEffect } from "react";
 
 function Home() {
-    document.title = "Fox Family Home Videos"
+
+    useEffect(() => {
+        document.title = "Fox Family Home Videos";
+    }, []);
+
     const isModalOpen = useRecoilValue(isModalOpenState);
 
     return (
