@@ -2,18 +2,14 @@
 
 import React, { useEffect } from 'react'
 import { PageTitle } from '../../GlobalStyles'
-import { SendMessageBtn } from '../../../components/VideoCard/VideoCard.styles';
 import { useQuery } from '@tanstack/react-query';
-import useDateFormat from '../../../helpers/dateFormat';
 import VideoCard from '../../../components/VideoCard/VideoCard';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
-import { currentPageNumberState, totalVideosState } from '../../providers';
-import { Inter, Permanent_Marker } from 'next/font/google';
-import Nav from '../../../components/Nav/Nav';
+import { totalVideosState } from '../../providers';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
-const permanentMarker = Permanent_Marker({ subsets: ['latin'], weight: ['400'], });
 
 const fetchVideo = async (sequence: number) => {
     const response = await fetch(`/api/videos/${sequence}`);
@@ -27,15 +23,12 @@ function VideoPage({ params }: { params: { sequence: string } }) {
     const router = useRouter();
 
     const totalVideos = useRecoilValue<number>(totalVideosState);
-    const currentPage = useRecoilValue<number>(currentPageNumberState);
 
     const { data, error, isLoading } = useQuery({
         queryKey: ['video', params.sequence],
         queryFn: () => fetchVideo(parseInt(params.sequence, 10)),
         staleTime: 1000 * 60 * 5, // 5 minutes
     });
-
-    const date = useDateFormat(data?.video.date);
 
     // set the video title to be the page title
     useEffect(() => {
@@ -61,12 +54,6 @@ function VideoPage({ params }: { params: { sequence: string } }) {
 
     return (
         <>
-
-            <PageTitle className={permanentMarker.className}>
-                Fox&nbsp;Family Home&nbsp;Videos
-            </PageTitle>
-            <Nav />
-
             <PageTitle>
                 {data.video.title}
             </PageTitle>

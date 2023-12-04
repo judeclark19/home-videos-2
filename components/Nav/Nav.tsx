@@ -18,7 +18,7 @@ function Nav() {
                 <li><Link className={`link ${pathname === '/' ? 'active' : ''}`} href={`/?page=${currentPage}`}>All Videos</Link></li>
                 <li><Link className={`link ${pathname === '/random' ? 'active' : ''}`} href="/random">Random Video</Link></li>
                 <li><Link className={`link ${pathname === '/favorites' ? 'active' : ''}`} href="/favorites">Favorites</Link></li>
-                <li><Link className={`link ${pathname === '/about' ? 'active' : ''}`} href="/about">Custom search/filter</Link></li>
+                <li><Link className={`link ${pathname === '/custom-search' ? 'active' : ''}`} href="/custom-search">Custom search/filter</Link></li>
             </ul>
         </StyledNav>
     )

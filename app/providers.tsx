@@ -3,12 +3,14 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { queryClient } from "../db/queryClient";
-import { GlobalStylesBody } from "./GlobalStyles";
-import { Inter } from 'next/font/google'
+import { GlobalStylesBody, PageTitle } from "./GlobalStyles";
+import { Inter, Permanent_Marker } from 'next/font/google'
 import { RecoilRoot, atom } from "recoil";
-import { Video } from "../db/types";
+import Nav from "../components/Nav/Nav";
 
 const inter = Inter({ subsets: ['latin'] })
+
+const permanentMarker = Permanent_Marker({ subsets: ['latin'], weight: ['400'], });
 
 export default function Providers({ children }: { children: ReactNode }) {
 
@@ -16,14 +18,17 @@ export default function Providers({ children }: { children: ReactNode }) {
         <GlobalStylesBody className={inter.className}>
             <QueryClientProvider client={queryClient}>
                 <RecoilRoot>
+                    <PageTitle className={permanentMarker.className}>
+                        Fox&nbsp;Family Home&nbsp;Videos
+                    </PageTitle>
+                    <Nav />
+
                     {children}
                 </RecoilRoot>
             </QueryClientProvider>
         </GlobalStylesBody>
     );
 }
-
-
 
 export const isModalOpenState = atom({
     key: "isModalOpen",

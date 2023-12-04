@@ -3,16 +3,59 @@
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { Video } from "../../db/types";
-import { CommentsCTA, IFrame, Loading, SendMessageBtn, Sequence, VideoEl, VideoInfo, VideoTitleAndDate } from "./VideoCard.styles";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar, } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarO } from '@fortawesome/free-regular-svg-icons';
+import { CommentsCTA, IFrame, Loading, SendMessageBtn, Sequence, Star, Tooltip, VideoEl, VideoInfo, VideoTitleAndDate } from "./VideoCard.styles";
 import { isModalOpenState, videoBeingCommentedState } from "../../app/providers";
 import useDateFormat from "../../helpers/dateFormat";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+const fetchFavorites = async () => {
+  const response = await fetch(`/api/favorites`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+}
 
 function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceButton?: boolean }) {
 
   const router = useRouter();
   const setIsModalOpen = useSetRecoilState(isModalOpenState);
   const [videoBeingCommented, setVideoBeingCommented] = useRecoilState(videoBeingCommentedState);
+
+  const [tooltipIsOpen, setTooltipIsOpen] = useState<boolean>(false);
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['favorites'],
+    queryFn: fetchFavorites,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(data?.some((favorite: Video) => favorite._id === video._id) || false);
+
+  const addToFavorites = useMutation({
+    mutationFn: (videoId: string) => {
+      return fetch(`/api/favorites/${videoId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    },
+    onMutate: () => {
+      setTooltipIsOpen(false);
+    },
+    onSettled: () => {
+      setTimeout(() => {
+        setTooltipIsOpen(false);
+      }, 1000);
+    },
+  });
+
 
 
   function formatDuration(seconds: number) {
@@ -95,6 +138,29 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
             setIsModalOpen(true);
           }}
         >Send message about this video</SendMessageBtn>
+
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            right: '20px'
+          }}
+        >
+          <Tooltip
+            isFavorite={isFavorite}
+            isVisible={tooltipIsOpen}
+          >
+            {isFavorite ? "Remove this video from favorites" : "Add this video to favorites"}
+          </Tooltip>
+          <Star
+            onClick={() => {
+              setIsFavorite(!isFavorite);
+              addToFavorites.mutate(video._id);
+            }}
+
+            isFavorite={isFavorite}
+          ><FontAwesomeIcon icon={isFavorite ? faStar : faStarO} /></Star>
+        </div>
       </CommentsCTA>
     </VideoEl>
   );

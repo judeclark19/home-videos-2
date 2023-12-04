@@ -1,32 +1,64 @@
 "use client"
 
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import VideoList from "../components/VideoList/VideoList"
-import { PageTitle } from "./GlobalStyles"
-import { isModalOpenState } from "./providers";
+import { currentPageNumberState, isModalOpenState, totalVideosState } from "./providers";
 import MessageModal from "../components/MessageModal/MessageModal";
 import { useEffect } from "react";
-import { Permanent_Marker } from "next/font/google";
-import Nav from "../components/Nav/Nav";
+import { useQuery } from "@tanstack/react-query";
+import Pagination from "../components/Pagination/Pagination";
 
-const permanentMarker = Permanent_Marker({ subsets: ['latin'], weight: ['400'], });
+const fetchVideos = async (page: number) => {
+    const response = await fetch(`/api/videos?page=${page}&limit=10`);
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    return response.json();
+};
 
 function Home() {
+
+    const [page, setPage] = useRecoilState<number>(currentPageNumberState);
+
+    const setTotalVideos = useSetRecoilState<number>(totalVideosState);
+
+    useEffect(() => {
+        // Get the page number from URL query string
+        const pageNumber = parseInt(new URL(window.location.href).searchParams.get("page") || "1", 10);
+        setPage(pageNumber);
+    }, [setPage]);
 
     useEffect(() => {
         document.title = "Fox Family Home Videos";
     }, []);
 
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['videos', page],
+        queryFn: () => fetchVideos(page),
+        staleTime: 1000 * 60 * 5, // 5 minutes
+    });
+
+    useEffect(() => {
+        if (data) {
+            setTotalVideos(data.totalVideos);
+        }
+    }, [data, setTotalVideos]);
+
     const isModalOpen = useRecoilValue(isModalOpenState);
 
     return (
         <>
-            <PageTitle className={permanentMarker.className}>
-                Fox&nbsp;Family Home&nbsp;Videos
-            </PageTitle>
-            <Nav />
-            {isModalOpen && (<MessageModal />)}
-            <VideoList />
+            {isLoading && <div>Loading...</div>}
+            {error && <div>An error occurred: {(error as Error).message}</div>}
+            {!isLoading && !error && data && (
+                <>
+                    <Pagination page={page} setPage={setPage} data={data} />
+                    {isModalOpen && (<MessageModal />)}
+                    <VideoList videos={data.videos} />
+                    <Pagination page={page} setPage={setPage} data={data} />
+
+                </>
+            )}
         </>
 
     )
