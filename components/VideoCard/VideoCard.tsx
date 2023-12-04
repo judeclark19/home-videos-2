@@ -1,13 +1,25 @@
-
-
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 import { Video } from "../../db/types";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faStarO } from '@fortawesome/free-regular-svg-icons';
-import { CommentsCTA, IFrame, Loading, SendMessageBtn, Sequence, Star, Tooltip, VideoEl, VideoInfo, VideoTitleAndDate } from "./VideoCard.styles";
-import { isModalOpenState, videoBeingCommentedState } from "../../app/providers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarO } from "@fortawesome/free-regular-svg-icons";
+import {
+  CommentsCTA,
+  IFrame,
+  Loading,
+  SendMessageBtn,
+  Sequence,
+  Star,
+  Tooltip,
+  VideoEl,
+  VideoInfo,
+  VideoTitleAndDate
+} from "./VideoCard.styles";
+import {
+  isModalOpenState,
+  videoBeingCommentedState
+} from "../../app/providers";
 import useDateFormat from "../../helpers/dateFormat";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -16,26 +28,35 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 const fetchFavorites = async () => {
   const response = await fetch(`/api/favorites`);
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error("Network response was not ok");
   }
   return response.json();
-}
+};
 
-function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceButton?: boolean }) {
-
+function VideoCard({
+  video,
+  sequenceButton = true
+}: {
+  video: Video;
+  sequenceButton?: boolean;
+}) {
   const router = useRouter();
   const setIsModalOpen = useSetRecoilState(isModalOpenState);
-  const [videoBeingCommented, setVideoBeingCommented] = useRecoilState(videoBeingCommentedState);
+  const [videoBeingCommented, setVideoBeingCommented] = useRecoilState(
+    videoBeingCommentedState
+  );
 
   const [tooltipIsOpen, setTooltipIsOpen] = useState<boolean>(false);
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ['favorites'],
+    queryKey: ["favorites"],
     queryFn: fetchFavorites,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5 // 5 minutes
   });
 
-  const [isFavorite, setIsFavorite] = useState<boolean>(data?.some((favorite: Video) => favorite._id === video._id) || false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    data?.some((favorite: Video) => favorite._id === video._id) || false
+  );
 
   const addToFavorites = useMutation({
     mutationFn: (videoId: string) => {
@@ -53,10 +74,8 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
       setTimeout(() => {
         setTooltipIsOpen(false);
       }, 1000);
-    },
+    }
   });
-
-
 
   function formatDuration(seconds: number) {
     // Calculate the minutes and seconds from the total seconds
@@ -71,7 +90,6 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
     return `${paddedMinutes}:${paddedSeconds}`;
   }
 
-
   return (
     <VideoEl id={video._id}>
       <Loading>
@@ -82,7 +100,9 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
               router.push(`/video/${video.sequence}`);
             }
           }}
-        >{video.sequence}.</Sequence>
+        >
+          {video.sequence}.
+        </Sequence>
         Loading video...
         <IFrame
           className="video-iframe"
@@ -96,9 +116,11 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
         ></IFrame>
       </Loading>
 
-
       <VideoTitleAndDate>
-        <h2>{video.title}{video.partNumber && ` (Part ${video.partNumber})`}</h2>
+        <h2>
+          {video.title}
+          {video.partNumber && ` (Part ${video.partNumber})`}
+        </h2>
         <h3>{useDateFormat(video.date)}</h3>
       </VideoTitleAndDate>
       <VideoInfo>
@@ -126,7 +148,11 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
           <strong>People</strong>: {video.people.join(", ")}
         </p>
 
-        {video.notes && <p><strong>Notes</strong>: {video.notes}</p>}
+        {video.notes && (
+          <p>
+            <strong>Notes</strong>: {video.notes}
+          </p>
+        )}
       </VideoInfo>
       <CommentsCTA>
         <p>
@@ -134,32 +160,46 @@ function VideoCard({ video, sequenceButton = true }: { video: Video, sequenceBut
         </p>
         <SendMessageBtn
           onClick={() => {
-            setVideoBeingCommented({ ...videoBeingCommented, videoId: video._id, partNumber: video.partNumber, sequence: video.sequence, url: video.url, title: video.title });
+            setVideoBeingCommented({
+              ...videoBeingCommented,
+              videoId: video._id,
+              partNumber: video.partNumber,
+              sequence: video.sequence,
+              url: video.url,
+              title: video.title
+            });
             setIsModalOpen(true);
           }}
-        >Send message about this video</SendMessageBtn>
+        >
+          Send message about this video
+        </SendMessageBtn>
 
         <div
           style={{
-            position: 'absolute',
-            bottom: '20px',
-            right: '20px'
+            position: "absolute",
+            bottom: "20px",
+            right: "20px"
           }}
         >
-          <Tooltip
-            isFavorite={isFavorite}
-            isVisible={tooltipIsOpen}
-          >
-            {isFavorite ? "Remove this video from favorites" : "Add this video to favorites"}
+          <Tooltip isFavorite={isFavorite} isVisible={tooltipIsOpen}>
+            {isFavorite
+              ? "Remove this video from favorites"
+              : "Add this video to favorites"}
           </Tooltip>
           <Star
             onClick={() => {
               setIsFavorite(!isFavorite);
               addToFavorites.mutate(video._id);
             }}
-
+            onMouseEnter={() => {
+              setTimeout(() => {
+                setTooltipIsOpen(true);
+              }, 500);
+            }}
             isFavorite={isFavorite}
-          ><FontAwesomeIcon icon={isFavorite ? faStar : faStarO} /></Star>
+          >
+            <FontAwesomeIcon icon={isFavorite ? faStar : faStarO} />
+          </Star>
         </div>
       </CommentsCTA>
     </VideoEl>
