@@ -14,7 +14,7 @@ const favoriteStar = keyframes`
     transform: scale(1.0);
     color: #f9ca06;
   }
-`
+`;
 
 const wave1 = keyframes`
   0% {
@@ -29,12 +29,12 @@ const wave1 = keyframes`
     opacity: 0;
     background-color: #f9d140;
   }
-`
+`;
 
 const wave2 = keyframes`
   30% { background-color: #e82cb2; opacity: 1; transform: scale(0); }
   70% { background-color: #fff; opacity: 0.4; transform: scale(1.2); }
-`
+`;
 
 export const VideoEl = styled.div`
   border: 1px solid #888;
@@ -124,13 +124,23 @@ export const VideoInfo = styled.div`
 `;
 
 export const CommentsCTA = styled.div`
-position: relative;
+  position: relative;
   padding: 20px;
   text-align: center;
   background-color: ${colors.magic_mint};
   color: ${colors.teal_blue};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+`;
+
+export const ButtonAndStar = styled.div`
+  @media screen and (max-width: 530px) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 `;
 
 // TODO: figure out my button styles
@@ -143,6 +153,16 @@ export const SendMessageBtn = styled.button`
   &:hover {
     background-color: ${colors.teal_blue}!important;
     color: ${colors.white_smoke}!important;
+  }
+`;
+
+export const StarPosition = styled.div`
+  position: relative;
+  
+  @media screen and (min-width: 531px) {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
   }
 `;
 
@@ -163,8 +183,9 @@ export const Star = styled.div<{
     scale: 1.08;
   }
 
-  &::after, &::before {
-    content: '';
+  &::after,
+  &::before {
+    content: "";
     position: absolute;
     z-index: 0;
     top: 0;
@@ -178,21 +199,21 @@ export const Star = styled.div<{
   ${(props) =>
     props.isFavorite &&
     css`
-    &::before{
-      animation: ${wave1} 0.8s ease-out;
-      z-index: 1;
-    }
-    &::after {
-      animation: ${wave2} 0.8s ease-out;
-      z-index: 2;
-    }
+      &::before {
+        animation: ${wave1} 0.8s ease-out;
+        z-index: 1;
+      }
+      &::after {
+        animation: ${wave2} 0.8s ease-out;
+        z-index: 2;
+      }
 
-    svg {
-      animation: ${favoriteStar} 0.6s linear forwards;
-      position: relative;
-      z-index: 3;
-    }
-  `}
+      svg {
+        animation: ${favoriteStar} 0.6s linear forwards;
+        position: relative;
+        z-index: 3;
+      }
+    `}
 `;
 
 export const Tooltip = styled.div<{
@@ -208,7 +229,7 @@ export const Tooltip = styled.div<{
   border-radius: 8px;
   box-shadow: 0 0 10px #888;
   z-index: 100;
- width: ${(props) => (props.isFavorite ? "270px" : "220px")};
+  width: ${(props) => (props.isFavorite ? "270px" : "220px")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +237,6 @@ export const Tooltip = styled.div<{
   opacity: ${(props) => (props.isVisible ? "1" : "0")};
   transition: opacity 150ms ease-in-out;
 
-  // no word wrap
   white-space: nowrap;
 
   &::after {
@@ -229,5 +249,4 @@ export const Tooltip = styled.div<{
     border-style: solid;
     border-color: #555 transparent transparent transparent;
   }
-
-`
+`;

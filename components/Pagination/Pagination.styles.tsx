@@ -43,7 +43,6 @@ export const PageSelect = styled.select`
   padding: 0px 8px;
   background-color: ${colors.magic_mint};
   border-color: ${colors.moonstone_blue};
-  /* color: white; */
   display: none;
 
   @media (max-width: 768px) {

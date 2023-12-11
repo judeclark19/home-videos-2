@@ -1,16 +1,17 @@
 import { useRecoilState, useSetRecoilState } from "recoil";
-
 import { Video } from "../../db/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarO } from "@fortawesome/free-regular-svg-icons";
 import {
+  ButtonAndStar,
   CommentsCTA,
   IFrame,
   Loading,
   SendMessageBtn,
   Sequence,
   Star,
+  StarPosition,
   Tooltip,
   VideoEl,
   VideoInfo,
@@ -66,14 +67,6 @@ function VideoCard({
           "Content-Type": "application/json"
         }
       });
-    },
-    onMutate: () => {
-      setTooltipIsOpen(false);
-    },
-    onSettled: () => {
-      setTimeout(() => {
-        setTooltipIsOpen(false);
-      }, 1000);
     }
   });
 
@@ -158,49 +151,49 @@ function VideoCard({
         <p>
           <em>Have comments or corrections for this video?</em>
         </p>
-        <SendMessageBtn
-          onClick={() => {
-            setVideoBeingCommented({
-              ...videoBeingCommented,
-              videoId: video._id,
-              partNumber: video.partNumber,
-              sequence: video.sequence,
-              url: video.url,
-              title: video.title
-            });
-            setIsModalOpen(true);
-          }}
-        >
-          Send message about this video
-        </SendMessageBtn>
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            right: "20px"
-          }}
-        >
-          <Tooltip isFavorite={isFavorite} isVisible={tooltipIsOpen}>
-            {isFavorite
-              ? "Remove this video from favorites"
-              : "Add this video to favorites"}
-          </Tooltip>
-          <Star
+        <ButtonAndStar>
+          <SendMessageBtn
             onClick={() => {
-              setIsFavorite(!isFavorite);
-              addToFavorites.mutate(video._id);
+              setVideoBeingCommented({
+                ...videoBeingCommented,
+                videoId: video._id,
+                partNumber: video.partNumber,
+                sequence: video.sequence,
+                url: video.url,
+                title: video.title
+              });
+              setIsModalOpen(true);
             }}
-            onMouseEnter={() => {
-              setTimeout(() => {
-                setTooltipIsOpen(true);
-              }, 500);
-            }}
-            isFavorite={isFavorite}
           >
-            <FontAwesomeIcon icon={isFavorite ? faStar : faStarO} />
-          </Star>
-        </div>
+            Send message about this video
+          </SendMessageBtn>
+
+          <StarPosition
+          >
+            <Tooltip isFavorite={isFavorite} isVisible={tooltipIsOpen}>
+              {isFavorite
+                ? "Remove this video from favorites"
+                : "Add this video to favorites"}
+            </Tooltip>
+            <Star
+              onClick={() => {
+                setIsFavorite(!isFavorite);
+                addToFavorites.mutate(video._id);
+              }}
+              onMouseEnter={() => {
+                setTimeout(() => {
+                  setTooltipIsOpen(true);
+                }, 500);
+              }}
+              onMouseLeave={() => {
+                setTooltipIsOpen(false);
+              }}
+              isFavorite={isFavorite}
+            >
+              <FontAwesomeIcon icon={isFavorite ? faStar : faStarO} />
+            </Star>
+          </StarPosition>
+        </ButtonAndStar>
       </CommentsCTA>
     </VideoEl>
   );

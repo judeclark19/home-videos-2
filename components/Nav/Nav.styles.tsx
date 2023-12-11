@@ -12,6 +12,13 @@ export const StyledNav = styled.nav`
     list-style: none;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 20px;
+  }
+
+  li {
+    margin: 10px 0;
   }
 
   a {
