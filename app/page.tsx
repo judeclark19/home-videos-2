@@ -7,14 +7,7 @@ import MessageModal from "../components/MessageModal/MessageModal";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Pagination from "../components/Pagination/Pagination";
-
-const fetchVideos = async (page: number) => {
-    const response = await fetch(`/api/videos?page=${page}&limit=10`);
-    if (!response.ok) {
-        throw new Error("Network response was not ok");
-    }
-    return response.json();
-};
+import { fetchVideos } from "../helpers/fetchVideos";
 
 function Home() {
 

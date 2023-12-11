@@ -5,15 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { totalVideosState } from '../providers';
 import { useQuery } from '@tanstack/react-query';
-
-const fetchVideos = async (page: number) => {
-    const response = await fetch(`/api/videos?page=${page}&limit=10`);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json();
-}
-
+import { fetchVideos } from '../../helpers/fetchVideos';
 
 export default function RandomPage() {
 
@@ -22,7 +14,7 @@ export default function RandomPage() {
 
     const [totalVideos, setTotalVideos] = useRecoilState<number>(totalVideosState);
 
-    const { data, error, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['videos', 1],
         queryFn: () => fetchVideos(1),
         staleTime: 1000 * 60 * 5, // 5 minutes
