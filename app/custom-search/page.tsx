@@ -1,12 +1,13 @@
 "use client";
 
 import React from 'react'
+import FilterForm from '../../components/FilterForm/FilterForm';
 
 function CustomSearch() {
     return (
         <>
             <div style={{ textAlign: "center" }}>
-                Coming soon :)
+                <FilterForm />
             </div>
         </>
     )
