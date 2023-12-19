@@ -1,16 +1,47 @@
 "use client";
 
-import React from 'react'
-import FilterForm from '../../components/FilterForm/FilterForm';
+import React, { useEffect, useState } from "react";
+import FilterForm from "../../components/FilterForm/FilterForm";
+import Pagination from "../../components/Pagination/Pagination";
+import { useQuery } from "@tanstack/react-query";
+import { fetchVideosByYear } from "../../helpers/fetchVideos";
+import { useRecoilValue } from "recoil";
+import { isModalOpenState } from "../providers";
+import MessageModal from "../../components/MessageModal/MessageModal";
+import VideoList from "../../components/VideoList/VideoList";
 
 function CustomSearch() {
-    return (
+  const [page, setPage] = useState<number>(1);
+  const [selectedYear, setSelectedYear] = useState<string>("");
+  const isModalOpen = useRecoilValue(isModalOpenState);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["videos", selectedYear, page],
+    queryFn: () => fetchVideosByYear(selectedYear, page),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    enabled: selectedYear !== "" // This will only run the query if a year is selected
+  });
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
+
+  return (
+    <>
+      <FilterForm
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+      />
+      {isModalOpen && <MessageModal />}
+      {selectedYear !== "" && (
         <>
-            <div style={{ textAlign: "center" }}>
-                <FilterForm />
-            </div>
+          <Pagination page={page} setPage={setPage} data={data} />
+          <VideoList videos={data?.videos} isLoading={isLoading} />
+          <Pagination page={page} setPage={setPage} data={data} />
         </>
-    )
+      )}
+    </>
+  );
 }
 
-export default CustomSearch
+export default CustomSearch;

@@ -41,6 +41,7 @@ export const PageNumbers = styled.div`
 
 export const PageSelect = styled.select`
   padding: 0px 8px;
+  border-radius: 4px;
   background-color: ${colors.magic_mint};
   border-color: ${colors.moonstone_blue};
   display: none;

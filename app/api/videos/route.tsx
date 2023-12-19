@@ -81,27 +81,33 @@ export async function GET(request: NextRequest) {
       });
     }
 
+    const videosBeforePagination = await db
+      .collection("videos")
+      .aggregate(aggregationStages)
+      .toArray();
+
     aggregationStages.push(
       { $sort: { sequence: 1 } },
       { $skip: skip },
       { $limit: limit }
     );
 
-    const videos = await db
+    const videosAfterPagination = await db
       .collection("videos")
       .aggregate(aggregationStages)
       .toArray();
 
-    console.log("videos fetched:", videos);
+    const totalVideos = videosBeforePagination.length;
 
-    const totalVideos = await db.collection("videos").countDocuments();
-
-    return new Response(JSON.stringify({ videos, totalVideos }), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json"
+    return new Response(
+      JSON.stringify({ videos: videosAfterPagination, totalVideos }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
   } catch (e) {
     return new Response(JSON.stringify({ error: (e as Error).message }), {
       status: 500,

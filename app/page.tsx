@@ -53,7 +53,7 @@ function Home() {
         <>
           <Pagination page={page} setPage={setPage} data={data} />
           {isModalOpen && <MessageModal />}
-          <VideoList videos={data.videos} />
+          <VideoList videos={data.videos} isLoading={isLoading} />
           <Pagination page={page} setPage={setPage} data={data} />
         </>
       )}

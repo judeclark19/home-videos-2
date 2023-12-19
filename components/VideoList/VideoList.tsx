@@ -12,15 +12,23 @@ const VideoListStyle = styled.div`
   margin: 0px 14px 40px 14px;
 `;
 
-function VideoList({ videos }: { videos: Video[] }) {
-    return (
-        <VideoListStyle>
-            {videos &&
-                videos.map((video: Video) => (
-                    <VideoCard key={video._id} video={video} />
-                ))}
-        </VideoListStyle>
-    );
+function VideoList({
+  videos,
+  isLoading
+}: {
+  videos: Video[];
+  isLoading: boolean;
+}) {
+  return (
+    <VideoListStyle>
+      {isLoading && <div>Loading...</div>}
+      {!isLoading &&
+        videos &&
+        videos.map((video: Video) => (
+          <VideoCard key={video._id} video={video} />
+        ))}
+    </VideoListStyle>
+  );
 }
 
 export default VideoList;
