@@ -29,6 +29,10 @@ function Pagination({
     router.push(url.pathname + url.search);
   };
 
+  if (totalPages === 1) {
+    return null;
+  }
+
   return (
     <PaginationStyle>
       <PrevNext

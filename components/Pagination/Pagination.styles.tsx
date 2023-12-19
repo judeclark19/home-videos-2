@@ -44,6 +44,7 @@ export const PageSelect = styled.select`
   border-radius: 4px;
   background-color: ${colors.magic_mint};
   border-color: ${colors.moonstone_blue};
+  color: ${colors.teal_blue};
   display: none;
 
   @media (max-width: 768px) {
