@@ -12,10 +12,11 @@ export const colors = {
 };
 
 export const GlobalStylesBody = styled.body`
+  margin: 0;
 
   background-color: ${colors.white_smoke};
   color: ${colors.teal_blue};
-  
+
   button {
     font-family: "Inter", sans-serif;
     font-size: 16px;

@@ -26,6 +26,16 @@ function CustomSearch() {
     console.log("data", data);
   }, [data]);
 
+  useEffect(() => {
+    setPage(1);
+    // update url
+    const url = new URL(window.location.href);
+    url.searchParams.set("year", selectedYear.toString());
+    url.searchParams.set("page", "1");
+    history.pushState({}, "", url.toString());
+    // url.searchParams.set("page", page.toString());
+  }, [selectedYear]);
+
   return (
     <>
       <FilterForm
