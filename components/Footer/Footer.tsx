@@ -52,9 +52,7 @@ function Footer() {
         Built by
         <strong>
           &nbsp;
-          <a href="https://github.com/judeclark19/react-solitaire">
-            Jude Clark
-          </a>
+          <a href="https://github.com/judeclark19/home-videos-2">Jude Clark</a>
         </strong>
       </div>
     </FooterStyle>
