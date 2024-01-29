@@ -19,7 +19,7 @@ function Favorites() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["favorites"],
     queryFn: fetchFavorites,
-    staleTime: 1000 * 60 * 5 // 5 minutes
+    staleTime: 0
   });
 
   const isModalOpen = useRecoilValue(isModalOpenState);
