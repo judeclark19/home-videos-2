@@ -2,7 +2,7 @@
 
 ## Deployed Site
 
-[https://fox-home-videos-f48b3a99c9d7.herokuapp.com/](https://fox-home-videos-f48b3a99c9d7.herokuapp.com/)
+[http://fox-family-home-videos.codecouture.site/](http://fox-family-home-videos.codecouture.site/)
 
 ![App Screenshot](app_screenshot.png)
 
