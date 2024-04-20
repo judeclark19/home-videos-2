@@ -70,8 +70,8 @@ export const IFrame = styled.iframe`
 `;
 
 export const VideoTitleAndDate = styled.div`
-  background-color: ${colors.teal_blue};
-  color: ${colors.white_smoke};
+  background-color: ${colors.nocturnal_sea};
+  color: ${colors.anemone};
   text-align: center;
   position: relative;
   h2 {
@@ -90,7 +90,8 @@ export const Sequence = styled.div<{
   top: 12px;
   left: 12px;
   z-index: 2;
-  background-color: ${colors.magic_mint};
+  background-color: ${colors.nocturnal_sea};
+  color: ${colors.anemone};
   padding: 10px;
   border-radius: 50%;
   display: flex;
@@ -104,8 +105,6 @@ export const Sequence = styled.div<{
     transition: all 150ms ease-in-out;
 
     &:hover {
-      background-color: ${colors.teal_blue};
-      color: ${colors.white_smoke};
       font-weight: 700;
       scale: 1.07;
     }
@@ -114,8 +113,8 @@ export const Sequence = styled.div<{
 
 export const VideoInfo = styled.div`
   padding: 0 20px;
-  border-radius: 8px;
   flex-grow: 1;
+  background-color: ${colors.anemone};
 
   .video-beginning {
     width: fit-content;
@@ -127,8 +126,8 @@ export const CommentsCTA = styled.div`
   position: relative;
   padding: 20px;
   text-align: center;
-  background-color: ${colors.magic_mint};
-  color: ${colors.teal_blue};
+  background-color: ${colors.almond_beige};
+  color: ${colors.nocturnal_sea};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 `;
@@ -145,14 +144,14 @@ export const ButtonAndStar = styled.div`
 
 // TODO: figure out my button styles
 export const SendMessageBtn = styled.button`
-  background-color: ${colors.white_smoke}!important;
-  color: ${colors.teal_blue}!important;
-  border-color: ${colors.moonstone_blue}!important;
+  background-color: ${colors.anemone}!important;
+  color: ${colors.nocturnal_sea}!important;
+  border-color: ${colors.nocturnal_sea}!important;
   border-radius: 8px;
 
   &:hover {
-    background-color: ${colors.teal_blue}!important;
-    color: ${colors.white_smoke}!important;
+    background-color: ${colors.nocturnal_sea}!important;
+    color: ${colors.anemone}!important;
   }
 `;
 

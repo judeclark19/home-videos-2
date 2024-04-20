@@ -6,9 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import VideoCard from "../../../components/VideoCard/VideoCard";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
-import { totalVideosState } from "../../providers";
+import { isModalOpenState, totalVideosState } from "../../providers";
 import { Inter } from "next/font/google";
 import Loader from "../../../components/Loader/Loader";
+import MessageModal from "../../../components/MessageModal/MessageModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ function VideoPage({ params }: { params: { sequence: string } }) {
   const router = useRouter();
 
   const totalVideos = useRecoilValue<number>(totalVideosState);
+  const isModalOpen = useRecoilValue<boolean>(isModalOpenState);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["video", params.sequence],
@@ -59,6 +61,7 @@ function VideoPage({ params }: { params: { sequence: string } }) {
 
   return (
     <>
+      {isModalOpen && <MessageModal />}
       <PageTitle>{data.video.title}</PageTitle>
 
       <div

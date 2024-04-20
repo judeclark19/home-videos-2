@@ -10,7 +10,8 @@ export const PaginationStyle = styled.div`
 
 export const PrevNext = styled.button`
   border-radius: 2px;
-
+  border-width: 1px;
+  background-color: ${colors.alabaster};
   &:disabled {
     border: none;
   }
@@ -24,27 +25,35 @@ export const PageNumbers = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
 
-  button {
-    font-size: 14px;
-    border-radius: 2px;
+export const PageNumber = styled.button`
+  font-size: 14px;
+  border-radius: 4px;
+  border-width: 1px;
+  background-color: ${colors.alabaster}!important;
 
-    &:disabled {
-      background-color: ${colors.powder_blue};
-      color: ${colors.white_smoke};
-      border: 1px solid ${colors.powder_blue};
-      cursor: not-allowed;
-      pointer-events: none;
-    }
+  // hover
+  &:hover {
+    background-color: ${colors.nocturnal_sea}!important;
+    color: ${colors.anemone};
+  }
+
+  &:disabled {
+    background-color: ${colors.gray}!important;
+    color: white;
+    border: 1px solid ${colors.gray};
+    cursor: not-allowed;
+    pointer-events: none;
   }
 `;
 
 export const PageSelect = styled.select`
   padding: 0px 8px;
   border-radius: 4px;
-  background-color: ${colors.magic_mint};
-  border-color: ${colors.moonstone_blue};
-  color: ${colors.teal_blue};
+  background-color: ${colors.alabaster};
+  border-color: ${colors.nocturnal_sea};
+  color: ${colors.basically_black};
   display: none;
 
   @media (max-width: 768px) {

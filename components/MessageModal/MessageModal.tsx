@@ -71,7 +71,23 @@ function MessageModal() {
   }
 
   return (
-    <ModalShade>
+    <ModalShade
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          setVideoBeingCommented({
+            videoId: "",
+            sequence: null,
+            partNumber: null,
+            url: "",
+            title: "",
+            senderName: "",
+            message: "",
+            addressed: false
+          });
+          setIsModalOpen(false);
+        }
+      }}
+    >
       <ModalWindow>
         <h2>
           Submit comments and/or corrections for video number{" "}
@@ -97,7 +113,6 @@ function MessageModal() {
           id={videoBeingCommented.videoId}
           onSubmit={(e) => {
             e.preventDefault();
-            // console.log(videoBeingCommented)
             postMessage.mutate(videoBeingCommented);
           }}
         >

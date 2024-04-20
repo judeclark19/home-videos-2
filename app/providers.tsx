@@ -43,9 +43,9 @@ function StyledComponentsRegistry({ children }: { children: React.ReactNode }) {
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <StyledComponentsRegistry>
-        <GlobalStylesBody className={inter.className}>
-          <RecoilRoot>
+      <RecoilRoot>
+        <StyledComponentsRegistry>
+          <GlobalStylesBody className={inter.className}>
             <div
               style={{
                 display: "flex",
@@ -66,9 +66,9 @@ export default function Providers({ children }: { children: ReactNode }) {
               </div>
               <Footer />
             </div>
-          </RecoilRoot>
-        </GlobalStylesBody>
-      </StyledComponentsRegistry>
+          </GlobalStylesBody>
+        </StyledComponentsRegistry>
+      </RecoilRoot>
     </QueryClientProvider>
   );
 }

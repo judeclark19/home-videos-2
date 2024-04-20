@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import {
+  PageNumber,
   PageNumbers,
   PageSelect,
   PaginationStyle,
@@ -43,13 +44,13 @@ function Pagination({
       </PrevNext>
       <PageNumbers>
         {[...Array(totalPages)].map((_, index) => (
-          <button
+          <PageNumber
             key={index}
             onClick={() => handlePageChange(index + 1)}
             disabled={page === index + 1}
           >
             {index + 1}
-          </button>
+          </PageNumber>
         ))}
       </PageNumbers>
 

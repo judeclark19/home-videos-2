@@ -13,10 +13,10 @@ const YearSelectFormGroup = styled.div`
     font-family: "Inter", sans-serif;
     padding: 8px 16px;
     border-radius: 4px;
-    background-color: ${colors.magic_mint};
-    border-color: ${colors.moonstone_blue};
+    background-color: ${colors.alabaster};
+    border-color: ${colors.nocturnal_sea};
+    color: ${colors.basically_black};
     font-size: 16px;
-    color: ${colors.teal_blue};
   }
 `;
 

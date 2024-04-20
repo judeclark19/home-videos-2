@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../app/GlobalStyles";
 
 export const StyledNav = styled.nav`
-  background-color: ${colors.magic_mint};
+  background-color: ${colors.almond_beige};
   margin-bottom: 30px;
   padding: 20px;
 
@@ -25,17 +25,19 @@ export const StyledNav = styled.nav`
     color: inherit;
     text-decoration: none;
     padding: 6px;
-    border: 1px solid ${colors.moonstone_blue};
-    border-radius: 2px;
+    border: 2px solid ${colors.basically_black};
+    background-color: ${colors.alabaster};
+    border-radius: 6px;
+    transition: all 0.2s ease;
 
     &:hover:not(.active) {
       text-decoration: underline;
-      font-weight: 700;
+      filter: brightness(1.1);
     }
   }
 
   .active {
-    background-color: ${colors.powder_blue};
-    font-weight: 700;
+    background-color: ${colors.anemone};
+    font-weight: 500;
   }
 `;
