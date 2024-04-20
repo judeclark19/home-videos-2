@@ -55,9 +55,6 @@ function Footer() {
           <a href="https://github.com/judeclark19/home-videos-2">Jude Clark</a>
         </strong>
       </div>
-      <div className="vertical-line">|</div>
-      <hr />
-      <div>Last updated April 20, 2024</div>
     </FooterStyle>
   );
 }
