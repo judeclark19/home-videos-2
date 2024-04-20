@@ -1,6 +1,7 @@
 "use client";
 
 import { Video } from "../../db/types";
+import Loader from "../Loader/Loader";
 import VideoCard from "../VideoCard/VideoCard";
 import styled from "styled-components";
 
@@ -21,7 +22,7 @@ function VideoList({
 }) {
   return (
     <VideoListStyle>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
       {!isLoading &&
         videos &&
         videos.map((video: Video) => (

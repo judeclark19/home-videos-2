@@ -46,13 +46,26 @@ export default function Providers({ children }: { children: ReactNode }) {
       <StyledComponentsRegistry>
         <GlobalStylesBody className={inter.className}>
           <RecoilRoot>
-            <PageTitle className={permanentMarker.className}>
-              Fox&nbsp;Family Home&nbsp;Videos
-            </PageTitle>
-            <Nav />
-
-            {children}
-            <Footer />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh"
+              }}
+            >
+              <PageTitle className={permanentMarker.className}>
+                Fox&nbsp;Family Home&nbsp;Videos
+              </PageTitle>
+              <Nav />
+              <div
+                style={{
+                  flex: 1
+                }}
+              >
+                {children}
+              </div>
+              <Footer />
+            </div>
           </RecoilRoot>
         </GlobalStylesBody>
       </StyledComponentsRegistry>

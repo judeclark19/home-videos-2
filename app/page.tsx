@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Pagination from "../components/Pagination/Pagination";
 import { fetchVideosByPage } from "../helpers/fetchVideos";
+import Loader from "../components/Loader/Loader";
 
 function Home() {
   const [page, setPage] = useRecoilState<number>(currentPageNumberState);
@@ -47,7 +48,7 @@ function Home() {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
       {error && <div>An error occurred: {(error as Error).message}</div>}
       {!isLoading && !error && data && (
         <>

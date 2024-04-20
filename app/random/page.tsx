@@ -36,5 +36,14 @@ export default function RandomPage() {
   }, [totalVideos]);
 
   // You can show a loading message or a spinner here
-  return <div>Redirecting to a random video...</div>;
+  return (
+    <div
+      style={{
+        textAlign: "center",
+        fontSize: "24px"
+      }}
+    >
+      Redirecting to a random video...
+    </div>
+  );
 }

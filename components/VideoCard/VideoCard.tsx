@@ -25,6 +25,7 @@ import useDateFormat from "../../helpers/dateFormat";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Tailspin } from "../Loader/Loader";
 
 const fetchFavorites = async () => {
   const response = await fetch(`/api/favorites`);
@@ -96,7 +97,7 @@ function VideoCard({
         >
           {video.sequence}.
         </Sequence>
-        Loading video...
+        <Tailspin />
         <IFrame
           className="video-iframe"
           src={video.url}
