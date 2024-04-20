@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import FilterForm from "../../components/FilterForm/FilterForm";
 import Pagination from "../../components/Pagination/Pagination";
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +12,8 @@ import MessageModal from "../../components/MessageModal/MessageModal";
 import VideoList from "../../components/VideoList/VideoList";
 
 function CustomSearch() {
+  const router = useRouter();
+
   const [page, setPage] = useState<number>(1);
   const [selectedYear, setSelectedYear] = useState<string>("");
   const isModalOpen = useRecoilValue(isModalOpenState);
@@ -28,13 +31,10 @@ function CustomSearch() {
 
   useEffect(() => {
     setPage(1);
-    // update url
-    const url = new URL(window.location.href);
-    url.searchParams.set("year", selectedYear.toString());
-    url.searchParams.set("page", "1");
-    history.pushState({}, "", url.toString());
-    // url.searchParams.set("page", page.toString());
-  }, [selectedYear]);
+    const query = { year: selectedYear.toString(), page: "1" };
+    const url = `?${new URLSearchParams(query).toString()}`;
+    router.push(url, { shallow: true });
+  }, [selectedYear, router]);
 
   return (
     <>

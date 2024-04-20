@@ -25,3 +25,4 @@
 - [ ] Global Search
 - [ ] Search by tags, locations or people
 - [ ] Filter by date range of choice
+- [ ] Possible color scheme https://www.threads.net/@awsmcolor/post/C30H0zmxlwW/?igshid=NTc4MTIwNjQ2YQ%3D%3D
