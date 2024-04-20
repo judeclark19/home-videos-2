@@ -87,7 +87,7 @@ function VideoCard({
     <VideoEl id={video._id}>
       <Loading>
         <Sequence
-          sequenceButton={sequenceButton}
+          $sequenceButton={sequenceButton}
           onClick={() => {
             if (sequenceButton) {
               router.push(`/video/${video.sequence}`);
@@ -168,9 +168,8 @@ function VideoCard({
             Send message about this video
           </SendMessageBtn>
 
-          <StarPosition
-          >
-            <Tooltip isFavorite={isFavorite} isVisible={tooltipIsOpen}>
+          <StarPosition>
+            <Tooltip $isFavorite={isFavorite} $isVisible={tooltipIsOpen}>
               {isFavorite
                 ? "Remove this video from favorites"
                 : "Add this video to favorites"}
@@ -188,7 +187,7 @@ function VideoCard({
               onMouseLeave={() => {
                 setTooltipIsOpen(false);
               }}
-              isFavorite={isFavorite}
+              $isFavorite={isFavorite}
             >
               <FontAwesomeIcon icon={isFavorite ? faStar : faStarO} />
             </Star>

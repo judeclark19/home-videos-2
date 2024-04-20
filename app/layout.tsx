@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" style={{ overflowX: "hidden" }}>
-      <body>
+      <body suppressHydrationWarning={true}>
         <Providers>{children}</Providers>
       </body>
     </html>

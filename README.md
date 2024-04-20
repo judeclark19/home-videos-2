@@ -21,7 +21,7 @@
 
 ## Possible future development, should there be demand
 
-- [ ] Improve FOUC/loading states
+- [ ] Improve loading states
 - [ ] Global Search
 - [ ] Search by tags, locations or people
 - [ ] Filter by date range of choice

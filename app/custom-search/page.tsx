@@ -26,10 +26,6 @@ function CustomSearch() {
   });
 
   useEffect(() => {
-    console.log("data", data);
-  }, [data]);
-
-  useEffect(() => {
     setPage(1);
     const query = { year: selectedYear.toString(), page: "1" };
     const url = `?${new URLSearchParams(query).toString()}`;

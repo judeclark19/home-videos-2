@@ -26,7 +26,6 @@ export default function RandomPage() {
   }, [data, setTotalVideos]);
 
   useEffect(() => {
-    console.log("totalVideos", totalVideos);
     if (totalVideos > 0) {
       // Generate a random number
       let randomSequence = Math.floor(Math.random() * totalVideos) + 1;

@@ -9,6 +9,10 @@ import { RecoilRoot, atom } from "recoil";
 import Nav from "../components/Nav/Nav";
 import Footer from "../components/Footer/Footer";
 
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const permanentMarker = Permanent_Marker({
@@ -16,21 +20,43 @@ const permanentMarker = Permanent_Marker({
   weight: ["400"]
 });
 
+function StyledComponentsRegistry({ children }: { children: React.ReactNode }) {
+  // Only create stylesheet once with lazy initial state
+  // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+
+  useServerInsertedHTML(() => {
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styles}</>;
+  });
+
+  if (typeof window !== "undefined") return <>{children}</>;
+
+  return (
+    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+      {children}
+    </StyleSheetManager>
+  );
+}
+
 export default function Providers({ children }: { children: ReactNode }) {
   return (
-    <GlobalStylesBody className={inter.className}>
-      <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          <PageTitle className={permanentMarker.className}>
-            Fox&nbsp;Family Home&nbsp;Videos
-          </PageTitle>
-          <Nav />
+    <QueryClientProvider client={queryClient}>
+      <StyledComponentsRegistry>
+        <GlobalStylesBody className={inter.className}>
+          <RecoilRoot>
+            <PageTitle className={permanentMarker.className}>
+              Fox&nbsp;Family Home&nbsp;Videos
+            </PageTitle>
+            <Nav />
 
-          {children}
-          <Footer />
-        </RecoilRoot>
-      </QueryClientProvider>
-    </GlobalStylesBody>
+            {children}
+            <Footer />
+          </RecoilRoot>
+        </GlobalStylesBody>
+      </StyledComponentsRegistry>
+    </QueryClientProvider>
   );
 }
 

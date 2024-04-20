@@ -80,7 +80,7 @@ export const VideoTitleAndDate = styled.div`
 `;
 
 export const Sequence = styled.div<{
-  sequenceButton: boolean;
+  $sequenceButton: boolean;
 }>`
   font-size: 20px;
   height: 28px;
@@ -98,7 +98,7 @@ export const Sequence = styled.div<{
   justify-content: center;
 
   ${(props) =>
-    props.sequenceButton &&
+    props.$sequenceButton &&
     `
     cursor: pointer;
     transition: all 150ms ease-in-out;
@@ -158,7 +158,7 @@ export const SendMessageBtn = styled.button`
 
 export const StarPosition = styled.div`
   position: relative;
-  
+
   @media screen and (min-width: 531px) {
     position: absolute;
     bottom: 20px;
@@ -167,7 +167,7 @@ export const StarPosition = styled.div`
 `;
 
 export const Star = styled.div<{
-  isFavorite: boolean;
+  $isFavorite: boolean;
 }>`
   height: 30px;
   width: 30px;
@@ -197,7 +197,7 @@ export const Star = styled.div<{
   }
 
   ${(props) =>
-    props.isFavorite &&
+    props.$isFavorite &&
     css`
       &::before {
         animation: ${wave1} 0.8s ease-out;
@@ -217,24 +217,24 @@ export const Star = styled.div<{
 `;
 
 export const Tooltip = styled.div<{
-  isFavorite: boolean;
-  isVisible: boolean;
+  $isFavorite: boolean;
+  $isVisible: boolean;
 }>`
   position: absolute;
   top: -53px;
-  left: ${(props) => (props.isFavorite ? "-129px" : "-105px")};
+  left: ${(props) => (props.$isFavorite ? "-129px" : "-105px")};
   background-color: #555;
   color: #fff;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px #888;
   z-index: 100;
-  width: ${(props) => (props.isFavorite ? "270px" : "220px")};
+  width: ${(props) => (props.$isFavorite ? "270px" : "220px")};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  opacity: ${(props) => (props.isVisible ? "1" : "0")};
+  opacity: ${(props) => (props.$isVisible ? "1" : "0")};
   transition: opacity 150ms ease-in-out;
 
   white-space: nowrap;
