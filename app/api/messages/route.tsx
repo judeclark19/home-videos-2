@@ -32,12 +32,16 @@ export async function POST(request: NextRequest) {
     const result = await db.collection("messages").insertOne(body);
 
     mailOptions.text = `${JSON.stringify(body, null, 2)}`;
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
+
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error(error);
+          reject(error);
+        } else {
+          resolve(info);
+        }
+      });
     });
 
     return new Response(JSON.stringify(result), {
