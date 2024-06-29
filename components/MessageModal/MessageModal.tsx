@@ -150,32 +150,33 @@ function MessageModal() {
             disabled={formDisabled}
           ></textarea>
 
+          <CancelButton
+            onClick={() => {
+              // reset form
+              setVideoBeingCommented({
+                videoId: "",
+                sequence: null,
+                partNumber: null,
+                url: "",
+                title: "",
+                senderName: "",
+                message: "",
+                addressed: false
+              });
+
+              setIsModalOpen(false);
+            }}
+            id="cancel-btn"
+            disabled={formDisabled}
+          >
+            Cancel
+          </CancelButton>
+          <div style={{ textAlign: "center", padding: "10px" }}>--- or ---</div>
+
           <button type="submit" id="webmaster" disabled={formDisabled}>
             {getButtonText()}
           </button>
-          <div style={{ textAlign: "center", padding: "10px" }}>--- or ---</div>
         </SendMessageForm>
-        <CancelButton
-          onClick={() => {
-            // reset form
-            setVideoBeingCommented({
-              videoId: "",
-              sequence: null,
-              partNumber: null,
-              url: "",
-              title: "",
-              senderName: "",
-              message: "",
-              addressed: false
-            });
-
-            setIsModalOpen(false);
-          }}
-          id="cancel-btn"
-          disabled={formDisabled}
-        >
-          Cancel
-        </CancelButton>
       </ModalWindow>
     </ModalShade>
   );

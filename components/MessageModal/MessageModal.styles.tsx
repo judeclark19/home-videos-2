@@ -66,6 +66,8 @@ export const CancelButton = styled.button`
   background-color: ${colors.faded_rose}!important;
   color: ${colors.anemone}!important;
   border-color: ${colors.faded_rose}!important;
+  width: fit-content;
+  margin: auto;
 
   &:hover {
     filter: brightness(1.1);
