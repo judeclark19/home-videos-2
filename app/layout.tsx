@@ -3,7 +3,12 @@ import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Fox Family Home Videos",
-  description: "Videos by Jim Fox, website by Jude Clark"
+  description: "Videos by Jim Fox, website by Jude Clark",
+  icons: {
+    icon: ["/favicon.ico"],
+    apple: ["/apple-touch-icon.png"],
+    shortcut: ["/apple-touch-icon.png"]
+  }
 };
 
 export default function RootLayout({
