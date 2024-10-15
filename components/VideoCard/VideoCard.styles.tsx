@@ -235,6 +235,7 @@ export const Tooltip = styled.div<{
   flex-direction: column;
   opacity: ${(props) => (props.$isVisible ? "1" : "0")};
   transition: opacity 150ms ease-in-out;
+  pointer-events: none;
 
   white-space: nowrap;
 
