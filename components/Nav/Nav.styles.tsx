@@ -11,7 +11,7 @@ export const StyledNav = styled.nav`
     padding: 0;
     list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     row-gap: 10px;
     column-gap: 20px;

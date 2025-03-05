@@ -58,7 +58,7 @@ function Footer() {
       </div>
       <div className="vertical-line">|</div>
       <hr />
-      <div>Updated Oct 7, 2024</div>
+      <div>Updated March 5, 2025</div>
     </FooterStyle>
   );
 }
